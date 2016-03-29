@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>Vitamin C - Rails Security and HIPAA</title>
+  <title>Intro to Cryptography and Encryption</title>
 
   <meta name="description" content="Vitamin C - Rails Security and HIPAA">
   <meta name="author" content="Jordan Burke">
@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
   <link rel="stylesheet" href="css/reveal.min.css">
-  <link rel="stylesheet" href="css/theme/night.css" id="theme">
+  <link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
   <!-- For syntax highlighting -->
   <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -37,24 +37,177 @@
       <!-- Any section element inside of this container is displayed as a slide -->
       <div class="slides">
         <section>
-          <h1>Title goes here</h1>
-          <h2>Subtitle goes here</h2>
+          <h1>Cryptography and Encryption</h1>
+        </section>
+        <section>
+          <h2>Tales from the Crypto-keeper</h2>
+          <img src="http://25.media.tumblr.com/a50030831fda37c1cb163f6f44840992/tumblr_msiyc1n4zl1qcnuapo1_500.gif" alt="">
         </section>
         <section>
           <h2>Who am I?</h2>
           <img class="no-border" src="http://bukk.it/koalafied.jpg" alt="">
         </section>
         <section>
-          <img class="no-border" src="/img/BurtMacklin.jpg" alt="">
+          <img class="no-border" src="/img/BurtMacklin.jpg" height="400">
           <h2><strike>&nbsp;&nbsp;Burt Macklin, FBI&nbsp;&nbsp;</strike></h2>
           <p>(Shh, the President's enemies think I'm dead)</p>
         </section>
         <section>
-          <pre>
-            <code>
-  This is a code slide.
-            </code>
-          </pre>
+          <h2>But for real</h2>
+          <h3>Lead Software Developer at Vestigo Adventures</h3>
+          <h3>Organizer of the Developers of Athens meetup</h3>
+          <h3>Paranoid technologist</h3>
+        </section>
+        <section>
+          <h2>Who cares?</h2>
+          <img src="http://bukk.it/wakewhenicare.gif" alt="">
+        </section>
+        <section>
+          <h2>In the news: Apple vs. The FBI</h2>
+          <h3>(You might be surprised whose side I'm on)</h3>
+        </section>
+        <section>
+          <h2>The situation</h2>
+          <h3>The San Bernardino shooting and Syed Farook</h3>
+        </section>
+        <section>
+          <h3>The FBI wants Apple to build a custom version of iOS that bypasses the security restrictions that makes it impossible to bombard the phone with unlock combinations.</h3>
+        </section>
+        <section>
+          <h3>Apple CEO Tim Cook believes that the order goes too far and that bypassing the password means creating a "back door" in its iOS mobile operating system that could be used to access every other iPhone </h3>
+        </section>
+        <section>
+          <h3>What does this have to do with encryption?</h3>
+        </section>
+        <section>
+          <h2>What the what even <i>IS</i> encryption?</h2>
+          <img src="http://bukk.it/brittawhat.gif" alt="">
+        </section>
+        <section>
+          <h1>Cryptography, Ciphers, and Keys</h1>
+        </section>
+        <section>
+          <h2>Cryptography: The science of using mathematics to encrypt and decrypt data</h2>
+          <img src="http://bukk.it/mathematical.gif" alt="">
+        </section>
+        <section>
+          <h3>Julius Caesar used cryptography to encode his messages to his generals</h3>
+          <h4>Even if they were captured, the message would be useless gibberish</h4>
+        </section>
+        <section>
+          <h3>But how does it work?</h3>
+          <img src="http://bukk.it/twerkin9to5.gif" alt="">
+        </section>
+        <section>
+          <h2>Caesar used a <em>rotational cipher</em></h2>
+          <h4>Basically, the letter "A" has its position <em>rotated</em> 8 (or however many) times and becomes "H", and so on</h4>
+        </section>
+        <section>
+          <h3>"HELLO WORLD" (plaintext) becomes "PMTTW EWZTL" (ciphertext)</h3>
+        </section>
+        <section>
+          <blockquote cite="http://www.pgpi.org/doc/pgpintro/">
+            &ldquo;There are two kinds of cryptography in this world: cryptography that will stop your kid sister from reading your files, and cryptography that will stop major governments from reading your files.&rdquo;
+          </blockquote>
+          <p>--Bruce Schneier, Applied Cryptography: Protocols, Algorithms, and Source Code in C.</p>
+        </section>
+        <section>
+          <h3>The difference between strong and weak cryptography is the amount of time it would take to find the cipher to decrypt the ciphertext.</h3>
+        </section>
+        <section>
+          <h2>iOS encryption == strong cryptography</h2>
+          <h4>Plus it erases the phone data after <em>n</em> wrong password attempts, so it's also destructive</h4>
+        </section>
+        <section>
+          <h2>Ciphers: the key to strong encryption</h2>
+          <img src="http://www.reactiongifs.com/r/2013/07/strong-olsen.gif" alt="">
+        </section>
+        <section>
+          <h2>A cipher is an algorithm used to encrypt plaintext</h2>
+        </section>
+        <section>
+          <h3>Cipher strength is determined by two things:</h3>
+          <h4>The computational power needed to brute force an attack</h4>
+          <h4>The key size (128 bits, 256 bits, etc)</h4>
+        </section>
+        <section>
+          <h3>Types of ciphers</h3>
+          <p class="fragment roll-in">Asymmetric Key</p>
+          <p class="fragment roll-in">Symmetric Key</p>
+        </section>
+        <section>
+          <h3>Asymmetric Key Encryption</h3>
+          <p class="fragment roll-in">Also called Public Key Encryption</p>
+          <p class="fragment roll-in">2 keys involved: a public key, published in the world and allows anyone to encrypt a message/data to send to the key owner</p>
+          <p class="fragment roll-in">A private key, kept secret by the key owner, which allows only the owner to decrypt the message/data.</p>
+        </section>
+        <section>
+          <h3>PGP (which we'll discuss in a second) is a form of asymmetric encryption.</h3>
+        </section>
+        <section>
+          <h3>Asymmetric Key Encryption involves <em>hashing</em> the message to produce a digest, a one-way function from which it is impossible to recreate the original data.</h3>
+        </section>
+        <section>
+          <h3>Hashing allows senders to attach a digital signature to the message, ensuring that the message received has not been altered in transmission.</h3>
+          <h4>Hashing is not encryption! It's a component of a secure cryptosystem, but as LinkedIn discovered, it is not a form of encryption in and of itself.</h4>
+        </section>
+        <section>
+          <h3>Things you might hear in conjunction with asymmetric key encryption:</h3>
+          <ul>
+            <li class="fragment roll-in">MD5, SHA-1/SHA-2</li>
+            <li class="fragment roll-in">Salts and peppers</li>
+            <li class="fragment roll-in">Public Key Infrastructure (PKI)/Certificate Authorities (CAs)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Symmetric Key Encryption</h3>
+          <p class="fragment roll-in">Uses the same key for encryption/decryption</p>
+          <p class="fragment roll-in">Relies on a shared secret to be effective</p>
+        </section>
+        <section>
+          <h3>Things you might here in conjunction with symmetric key encryption:</h3>
+          <ul>
+            <li class="fragment roll-in">AES, Blowfish, RC4, Enigma (Reciprocal cipher) </li>
+            <li class="fragment roll-in">Known plaintext attacks, Linear cryptanalysis</li>
+          </ul>
+        </section>
+        <section>
+          <h2>ARE WE DONE YET???</h2>
+          <img src="http://bukk.it/seinfeld-done.gif" alt="">
+        </section>
+        <section>
+          <h2>Security vs. Privacy</h2>
+          <h3>Neither are a binary state</h3>
+        </section>
+        <section>
+          <h2>Privacy is security for your personal information</h2>
+        </section>
+        <section>
+          <h2>Protecting your email</h2>
+          <h3>Mailvelope - PGP for Gmail</h3>
+          <h3>Kleopatra - generate PGP keys for Outlook</h3>
+          <h4>^<a href="http://www.triatechnology.com/sending-a-pgp-encrypted-email-in-outlook-or-webmail/">http://www.triatechnology.com/sending-a-pgp-encrypted-email-in-outlook-or-webmail/</a></h4>
+        </section>
+        <section>
+          <h2>Encrypting SMS and Phone calls</h2>
+          <h3><a href="https://whispersystems.com">Whisper Systems</a></h3>
+        </section>
+        <section>
+          <h2>If you want to get really crazy, encrypt everything with OpenPGP</h2>
+        </section>
+        <section>
+          <h2>VPNs - hide your browsing</h2>
+          <h3>Not a panacea</h3>
+        </section>
+        <section>
+          <img src="/img/Proxyserverlogodarknologo.png" alt="">
+          <h3>ProxyServer - free 7 day trial!</h3>
+        </section>
+        <section>
+          <h3>Decide for yourself - is it worth your time and effort?</h3>
+        </section>
+        <section>
+          <h2>Q&A</h2>
         </section>
         <section>
           <h2>Thanks for listening!</h2>
